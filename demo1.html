@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        v-cloak{
+            display: none;
+        }
+    </style>
+   
+</head>
+<body>
+    <div id="app"> 
+        <!-- {{name}}
+        {{name=='黑马程序员'?'true':'false'}}
+        {{f1(name)}} -->
+        <!-- <div v-html="name"></div>
+        <div v-text="name"></div> -->
+        <p v-cloak>{{name}}</p>
+        </br>
+        <button v-on:click="change">点击</button>
+        <!-- 
+        <input type="text" v-bind:value="name">
+        <input type="text" :value="name">
+        <a v-bind="{href:'http://itcast.cn/index/'+id}">跳转</a></br>
+        <input type="text" v-model="name"> -->
+
+        <form action="http://itcast.cn" @submit.prevent>
+            <!-- <input type="text" v-model="user.uname">
+            <input type="text" v-model="user.pwd">
+             <input type="submit" v-on:click="submit" > -->
+            <!-- <input type="submit" @click="submit">  -->
+
+
+            <input type="submit" @click="submit">
+        </form>
+        <ul>
+            <!-- <li v-for="item in list">{{item}}=>{{$index}}</li> -->
+            <li v-for="(index,item) in list"  track-by="$index">{{index}}=>{{item}}</li>
+           <!--  vue1.0写法:index在前
+            vue2.0写法:index在后 -->
+           <!--  <li v-for="(item,index) in list"   :key="index">{{index}}=>{{item}}</li> -->
+
+            <!-- <li v-for="item in user">{{item}}</li> -->
+            <!-- <li v-for="(key,item) in user" >{{key}}=>{{item}}</li> -->
+        </ul>
+        <button v-on:click="toggle"> 隐藏/显示</button>
+        <h3 v-show="isShow">hello</h3>
+        <h3 v-if="isShow">hello</h3>   
+        <!-- v-if将元素添加或移除 -->
+        <!-- v-show给元素加display:none或display:block进行隐藏和显示 -->
+
+
+    </div>
+</body>
+ <!--1.导入js文件-->
+    <script src="vue1026.js"></script>
+<script>
+    //2.实例化对象
+    //vm:mvvm中的 View Model
+    var vm=new Vue({
+        el:'#app', //表示当前vue对象接管app的div区域
+        data:{
+            name:'黑马程序员' , //相当于mvvm中的Model这个角色
+            // name:'<div>黑马程序员</div>'
+            id:2,
+            user:{
+                uname:'xiaoming',
+                pwd:123
+            },
+            list:[1,2,3,3,3],
+            isShow:true
+        },
+        methods:{
+            change:function(){
+                console.log(this)
+                this.name+="1"
+            },
+            f1:function(str){
+                return str =='wo'
+            },
+            submit:function(){
+                console.log(this.user.uname)
+            },
+            toggle:function(){
+                this.isShow=!this.isShow
+            }
+        }
+    })
+</script>
+</html>
